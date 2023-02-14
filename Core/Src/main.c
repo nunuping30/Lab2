@@ -48,16 +48,21 @@ UART_HandleTypeDef huart2;
 typedef struct //เ�?�?�?�?�?า DMA �?ดยสร�?า�? struct มาเ�?�?�?�?�?า 2 อย�?า�? �?�?ตัวเดียว
 {
 	uint16_t IN0;//เ�?�?�? �?า in0 value volt
-	uint16_t temp;//เ�?�?�? temp
+	uint16_t Temp;//เ�?�?�? temp
+
+	uint16_t AvgVin;
+	uint16_t Vin;
+
+	uint16_t AvgTemp;
+	uint16_t Temp;
+
 }ADCDMABuffer;
 
 ADCDMABuffer adcdmabuffer[10];
 
-
-
 // eg.  a = adcdmabuffer[0].IN0  �?ี�?ที�?ต�?. 0 เเละ�?�?า�?อ�? IN0
 
-
+uint16_t Vin = 0;
 
 /* USER CODE END PV */
 
@@ -120,13 +125,32 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	  //Call function every 1000 ms = 1 s =  1 Hz
 		static uint32_t timestamp = 0;
-		//if (HAL_GetTick() >= timestamp)
-		//{
-			//timestamp = HAL_GetTick() + 1000;
+		if (HAL_GetTick() >= timestamp)
+		{
+			timestamp = HAL_GetTick() + 1000;
 
+			register int i;
+			for (i = 0; i < 10; i++)
+			{
+				AvgVin += adcdmabuffer[i].IN0 ;
+				AvgTemp += adcdmabuffer[i].Temp ;
 
+				if (i == 9)
+				{
+					AvgVin = AvgVin / 10 ; // find Avg Vin
+					AvgTemp = AvgTemp / 10 ; // find Avg Temp
+				}
+			}
+				Vin = (( AvgVin * 3.3 * 1000) / 4096 )* 2;  //find Vin * 2 because voltage div
+				Temp = (((( AvgTemp * 3.3 * 1000) / 4096 ) - (0.76 * 1000)) / 2.5 ) + 25 + 273.15; //find Temp
+				 // V25 = 0.76 mV. = 0.76 * 10^3
+				//  (( AvgTemp * 3.3 * 1000) / 4096 )  bit to mV.
+				//  + 273.15   C to Kevin
 
-		//}
+				AvgVin = 0 ;  //set start
+				AvgTemp = 0 ; //set start
+
+		}
   }
   /* USER CODE END 3 */
 }
