@@ -50,19 +50,17 @@ typedef struct //เ�?�?�?�?�?า DMA �?ดยสร�?า�? stru
 	uint16_t IN0;//เ�?�?�? �?า in0 value volt
 	uint16_t Temp;//เ�?�?�? Temp
 
-	uint16_t AvgVin; // bit
-	uint16_t Vin; // mV
-
-	uint16_t AvgTemp; // bit
-	uint16_t Temp; // K
-
 }ADCDMABuffer;
 
 ADCDMABuffer adcdmabuffer[10];
 
 // eg.  a = adcdmabuffer[0].IN0  �?ี�?ที�?ต�?. 0 เเละ�?�?า�?อ�? IN0
 
-uint16_t Vin = 0;
+uint16_t AvgVin = 0; // bit
+uint16_t Vin = 0; // mV
+
+uint16_t AvgTemp = 0 ; // bit
+uint16_t TemptoKevin = 0 ;  // K
 
 /* USER CODE END PV */
 
@@ -142,7 +140,7 @@ int main(void)
 				}
 			}
 				Vin = (( AvgVin * 3.3 * 1000) / 4096 )* 2;  //find Vin * 2 because voltage div
-				Temp = (((( AvgTemp * 3.3 * 1000) / 4096 ) - (0.76 * 1000)) / 2.5 ) + 25 + 273.15; //find Temp
+				TemptoKevin = (((( AvgTemp * 3.3 * 1000) / 4096 ) - (0.76 * 1000)) / 2.5 ) + 25 + 273.15; //find Temp
 				 // V25 = 0.76 mV. = 0.76 * 10^3
 				//  (( AvgTemp * 3.3 * 1000) / 4096 )  bit to mV.
 				//  + 273.15   C to Kevin
