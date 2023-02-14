@@ -48,13 +48,13 @@ UART_HandleTypeDef huart2;
 typedef struct //เ�?�?�?�?�?า DMA �?ดยสร�?า�? struct มาเ�?�?�?�?�?า 2 อย�?า�? �?�?ตัวเดียว
 {
 	uint16_t IN0;//เ�?�?�? �?า in0 value volt
-	uint16_t Temp;//เ�?�?�? temp
+	uint16_t Temp;//เ�?�?�? Temp
 
-	uint16_t AvgVin;
-	uint16_t Vin;
+	uint16_t AvgVin; // bit
+	uint16_t Vin; // mV
 
-	uint16_t AvgTemp;
-	uint16_t Temp;
+	uint16_t AvgTemp; // bit
+	uint16_t Temp; // K
 
 }ADCDMABuffer;
 
