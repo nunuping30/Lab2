@@ -111,11 +111,13 @@ int main(void)
   MX_USART2_UART_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t*) adcdmabuffer, 20);
   /* USER CODE END 2 */
 
   /* Infinite loop */
+
   /* USER CODE BEGIN WHILE */
+
   while (1)
   {
     /* USER CODE END WHILE */
@@ -127,11 +129,11 @@ int main(void)
 		{
 			timestamp = HAL_GetTick() + 1000;
 
-			register int i;
+			//register int i;
 			AvgVin = 0 ;  //set start
 			AvgTemp = 0 ; //set start
 
-			for (i = 0; i < 10; i++)
+			for (int i = 0; i < 10; i++)
 			{
 				AvgVin += adcdmabuffer[i].IN0 ;
 				AvgTemp += adcdmabuffer[i].Temp ;
@@ -350,13 +352,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)//
-{
-	if (GPIO_Pin == GPIO_PIN_13)
-	{
-		HAL_ADC_Start_DMA(&hadc1, (uint32_t*) adcdmabuffer, 20);
-	}
-}
+
 /* USER CODE END 4 */
 
 /**
