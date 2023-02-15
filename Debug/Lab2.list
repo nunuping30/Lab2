@@ -1062,7 +1062,7 @@ int main(void)
  8000cf4:	f503 737a 	add.w	r3, r3, #1000	; 0x3e8
  8000cf8:	4a5f      	ldr	r2, [pc, #380]	; (8000e78 <main+0x1c0>)
  8000cfa:	6013      	str	r3, [r2, #0]
-
+//
 			//register int i;
 			AvgVin = 0 ;  //set start
  8000cfc:	4b5f      	ldr	r3, [pc, #380]	; (8000e7c <main+0x1c4>)

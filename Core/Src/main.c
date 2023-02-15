@@ -47,8 +47,8 @@ UART_HandleTypeDef huart2;
 /* USER CODE BEGIN PV */
 typedef struct //เ�?�?�?�?�?า DMA �?ดยสร�?า�? struct มาเ�?�?�?�?�?า 2 อย�?า�? �?�?ตัวเดียว
 {
-	uint16_t IN0;//เ�?�?�? �?า in0 value volt
-	uint16_t Temp;//เ�?�?�? Temp
+	uint16_t IN0;//เ�?�?�? �?า in0 value volt // Rank 1
+	uint16_t Temp;//เ�?�?�? Temp // Rank 2
 
 }ADCDMABuffer;
 
