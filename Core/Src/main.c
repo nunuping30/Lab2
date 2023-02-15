@@ -128,7 +128,7 @@ int main(void)
 		if (HAL_GetTick() >= timestamp)
 		{
 			timestamp = HAL_GetTick() + 1000;
-
+//
 			//register int i;
 			AvgVin = 0 ;  //set start
 			AvgTemp = 0 ; //set start
