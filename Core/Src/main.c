@@ -128,6 +128,9 @@ int main(void)
 			timestamp = HAL_GetTick() + 1000;
 
 			register int i;
+			AvgVin = 0 ;  //set start
+			AvgTemp = 0 ; //set start
+
 			for (i = 0; i < 10; i++)
 			{
 				AvgVin += adcdmabuffer[i].IN0 ;
@@ -145,8 +148,8 @@ int main(void)
 				//  (( AvgTemp * 3.3 * 1000) / 4096 )  bit to mV.
 				//  + 273.15   C to Kevin
 
-				AvgVin = 0 ;  //set start
-				AvgTemp = 0 ; //set start
+				//AvgVin = 0 ;  //set start
+				//AvgTemp = 0 ; //set start
 
 		}
   }
